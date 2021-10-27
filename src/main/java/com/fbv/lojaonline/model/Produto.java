@@ -23,7 +23,6 @@ public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String descricao;
     private Double valorVenda;
     private String categoria;

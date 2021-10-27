@@ -42,14 +42,14 @@ public class ProdutoController {
         
     }
 
-   /*
+    /*
     @RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
     public ModelAndView editar(@PathVariable long id){
         ModelAndView mv = new ModelAndView("produto/cadastro-produto");
         mv.addObject("produto",repository.findById(id));
         return mv;
     }
-   
+     
     @RequestMapping(value = "/editar", method = RequestMethod.GET)
     public ModelAndView editar(){
         ModelAndView mv = new ModelAndView("produto/cadastro-produto");
@@ -57,6 +57,8 @@ public class ProdutoController {
         return mv;
     }
     */
+
+  
     @RequestMapping(value = "/deleta/{id}", method = RequestMethod.GET)
     public String deleta(@PathVariable long id){
         repository.deleteById(id);
