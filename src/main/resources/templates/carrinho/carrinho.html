@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="layout/layout-padrao">
+
+<body id="body">
+<section layout:fragment="custom-content">
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Carrinho</h1>
+					<ol class="breadcrumb">
+						<li><a th:href="@{/inicio}">Inicio</a></li>
+						<li class="active">Carrinho</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="page-wrapper">
+  <div class="cart shopping">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="block">
+            <div class="product-list">
+              <form method="post">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="">Produto</th>
+                      <th class="">Valor</th>
+                      <th class="">Ação</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="item : ${itens}">
+                      <td class="">
+                        <div class="product-info">
+                          <img width="80" th:src="@{/produto/mostrarImagem/{ìmagem}(ìmagem=${item.produto.nomeImagem})}" alt="" />
+                          <a href="#!" th:text="${item.produto.nome}">Sunglass</a>
+                        </div>
+                      </td>
+                      <td class="" th:text="'R$' + ${item.valorUnidade}">$200.00</td>
+                      <td class="">
+                        <a class="product-remove" th:href="@{/carrinho/remover/{id}(id=${item.produto.id})}">Remove</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a th:href="@{/carrinho/comprar}" class="btn btn-main pull-right">Comprar</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+</body>
+</html>

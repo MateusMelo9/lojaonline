@@ -8,14 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
   
   
-    @RequestMapping("inicio")
+    @RequestMapping(value = {"","/","inicio"})
     public String inicio(){
-        return "index";
+        return "inicio";
     }
-    /*
-    @RequestMapping("login")
-    public String login(){
-        return "login";
-    }
-    */
+
 }

@@ -3,13 +3,15 @@ package com.fbv.lojaonline.controller;
 import com.fbv.lojaonline.model.Cliente;
 import com.fbv.lojaonline.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/cliente")
@@ -24,9 +26,9 @@ public class ClienteController {
     }
 
     @RequestMapping(value = "/novo", method = RequestMethod.POST)
-    public String cadastrar(Cliente cliente){
-        repository.save(cliente);
-        return "redirect:/login";
+    public String cadastrarCliente(Cliente cliente){
+        cadastrar(cliente);
+        return "redirect:/inicio";
     }
 
     @RequestMapping(value = "/consulta", method = RequestMethod.GET)
@@ -51,8 +53,13 @@ public class ClienteController {
 
     @RequestMapping(value = "/editar/{id}", method = RequestMethod.POST)
     public String editar(Cliente cliente){
-        repository.save(cliente);
+        cadastrar(cliente);
         return "redirect:/cliente/consulta";
+    }
+
+    public void cadastrar(Cliente cliente){
+        cliente.setSenha(new BCryptPasswordEncoder().encode(cliente.getSenha()));
+        repository.save(cliente);
     }
 
 }
